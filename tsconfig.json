@@ -1,19 +1,32 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ESNext", // 指定ECMAScript目标版本
     "useDefineForClassFields": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "ESNext", // 指定生成哪个模块系统代码
+    "moduleResolution": "Node", // 决定如何处理模块。
+    // 启用所有严格类型检查选项。
+    // 启用 --strict相当于启用 --noImplicitAny, --noImplicitThis, --alwaysStrict，
+    // --strictNullChecks和 --strictFunctionTypes和--strictPropertyInitialization。
     "strict": true,
     "jsx": "preserve",
-    "sourceMap": true,
+    "sourceMap": true, // 生成相应的 .map文件。
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "noImplicitAny": false,
     "esModuleInterop": true,
+    "skipLibCheck": true, // 解决打包 `vue-tsc --noEmit`的问题
     "lib": ["ESNext", "DOM"],
-    "skipLibCheck": true
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "auto-imports.d.ts",
+    "components.d.ts"
+  ],
+  "exclude": ["dist", "node_modules"]
 }

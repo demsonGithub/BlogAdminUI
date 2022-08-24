@@ -1,38 +1,36 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-defineProps<{ msg: string }>()
-
-const count = ref(0)
-</script>
-
 <template>
-  <h1>{{ msg }}</h1>
+  <div class="div-wrapper">
+    <h1>{{ showCount }}</h1>
 
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
-      Edit
-      <code>components/HelloWorld.vue</code> to test HMR
-    </p>
+    <button type="button" @click="addBtn">count is:{{ count }}</button>
+    <el-button>Default</el-button>
+    <el-button type="primary">Primary</el-button>
+    <el-button type="success">Success</el-button>
+    <el-button type="info">Info</el-button>
+    <el-button type="warning">Warning</el-button>
+    <el-button type="danger">Danger</el-button>
   </div>
-
-  <p>
-    Check out
-    <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
-      >create-vue</a
-    >, the official Vue + Vite starter
-  </p>
-  <p>
-    Install
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-    in your IDE for a better DX
-  </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
 </template>
 
-<style scoped>
-.read-the-docs {
-  color: #888;
+<script lang="ts" setup>
+import { ref, computed } from 'vue'
+import { useStore } from '@/store/index'
+
+const store = useStore()
+
+const count = ref(0)
+const showCount = computed(() => {
+  return store.getters['getCount']
+})
+
+const addBtn = () => {
+  store.commit('setCount', ++count.value)
+}
+</script>
+<style lang="scss" scope>
+.div-wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: red;
 }
 </style>
